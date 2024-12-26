@@ -5,11 +5,11 @@ import docx2txt  # For Word files
 import PyPDF2  # For PDF files
 from PIL import Image
 
-# Load the image 
-image = Image.open('SCAMPI - Legacy Inventory Intelligence System.png') 
+# Load the image
+image = Image.open('SCAMPI - Legacy Inventory Intelligence System.png')
 
-# Display the image
-st.image(image, use_column_width=True) 
+# Display the image (using use_container_width)
+st.image(image, use_container_width=True)  
 
 # Show title and description.
 st.title("SCAMPI: Legacy Inventory Intelligence System")
