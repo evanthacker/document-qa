@@ -9,14 +9,13 @@ from PIL import Image
 image = Image.open('SCAMPI - Legacy Inventory Intelligence System.png')
 
 # Display the image (using use_container_width)
-st.image(image, use_container_width=True)  
+st.image(image, use_container_width=True)
 
 # Show title and description.
 st.title("SCAMPI: Legacy Inventory Intelligence System")
 st.write(
     "Upload a document (.txt, .md, .csv, .xlsx, .docx, .pdf) below and ask a question about it. A custom artificial intelligence (A.I.) large language model (LLM) model will answer!"
 )
-
 
 # Access the OpenAI API key from Streamlit secrets
 openai_api_key = st.secrets["OPENAI_API_KEY"]
@@ -62,12 +61,18 @@ if uploaded_file and question:
         }
     ]
 
-    # Generate an answer using the OpenAI API.
-    stream = client.chat.completions.create(
+    # Generate an answer using the OpenAI API with streaming enabled.
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         stream=True,
     )
 
-    # Stream the response to the app using `st.write_stream`.
-    st.write_stream(stream)
+    # Display the streamed response.
+    response_placeholder = st.empty()
+    full_response = ""
+    for chunk in response:
+        if "content" in chunk.choices[0].delta:
+            full_response += chunk.choices[0].delta.content
+            response_placeholder.markdown(full_response + "▌")  # Typing indicator
+    response_placeholder.markdown(full_response)  # Final response
