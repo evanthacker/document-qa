@@ -3,4 +3,4 @@ openai
 docx2txt
 PyPDF2
 pandas
-openpyxl 
+openpyxl

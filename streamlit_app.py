@@ -3,12 +3,20 @@ from openai import OpenAI
 import pandas as pd
 import docx2txt  # For Word files
 import PyPDF2  # For PDF files
+from PIL import Image
+
+# Load the image 
+image = Image.open('SCAMPI - Legacy Inventory Intelligence System.png') 
+
+# Display the image
+st.image(image, use_column_width=True) 
 
 # Show title and description.
 st.title("SCAMPI: Legacy Inventory Intelligence System")
 st.write(
     "Upload a document (.txt, .md, .csv, .xlsx, .docx, .pdf) below and ask a question about it. A custom artificial intelligence (A.I.) large language model (LLM) model will answer!"
 )
+
 
 # Access the OpenAI API key from Streamlit secrets
 openai_api_key = st.secrets["OPENAI_API_KEY"]
