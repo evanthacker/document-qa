@@ -61,18 +61,12 @@ if uploaded_file and question:
         }
     ]
 
-    # Generate an answer using the OpenAI API with streaming enabled.
-    response = client.chat.completions.create(
+    # Generate an answer using the OpenAI API.
+    stream = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         stream=True,
     )
 
-    # Display the streamed response.
-    response_placeholder = st.empty()
-    full_response = ""
-    for chunk in response:
-        if "content" in chunk.choices[0].delta:
-            full_response += chunk.choices[0].delta.content
-            response_placeholder.markdown(full_response + "▌")  # Typing indicator
-    response_placeholder.markdown(full_response)  # Final response
+    # Stream the response to the app using `st.write_stream`.
+    st.write_stream(stream)
