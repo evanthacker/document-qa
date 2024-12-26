@@ -7,7 +7,7 @@ import PyPDF2  # For PDF files
 # Show title and description.
 st.title("SCAMPI: Legacy Inventory Intelligence System")
 st.write(
-    "Upload a document (.txt, .md, .csv, .xlsx, .docx, .pdf) below and ask a question about it. A custom artificial intelligence (AI) large language model (LLM) model will answer!"
+    "Upload a document (.txt, .md, .csv, .xlsx, .docx, .pdf) below and ask a question about it. A custom artificial intelligence (A.I.) large language model (LLM) model will answer!"
 )
 
 # Access the OpenAI API key from Streamlit secrets
