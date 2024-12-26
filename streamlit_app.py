@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+import pandas as pd
 
 # Show title and description.
 st.title("📄 Document question answering")
@@ -21,7 +22,7 @@ else:
 
     # Let the user upload a file via `st.file_uploader`.
     uploaded_file = st.file_uploader(
-        "Upload a document (.txt or .md)", type=("txt", "md")
+        "Upload a document (.txt, .md or .csv)", type=("txt", "md", "csv")
     )
 
     # Ask the user for a question via `st.text_area`.
@@ -34,7 +35,12 @@ else:
     if uploaded_file and question:
 
         # Process the uploaded file and question.
-        document = uploaded_file.read().decode()
+        if uploaded_file.name.endswith(".csv"):
+            df = pd.read_csv(uploaded_file)
+            document = df.to_csv(index=False)
+        else:
+            document = uploaded_file.read().decode()
+
         messages = [
             {
                 "role": "user",
