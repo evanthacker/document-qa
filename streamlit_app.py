@@ -3,9 +3,9 @@ from openai import OpenAI
 import pandas as pd
 
 # Show title and description.
-st.title("📄 Document question answering")
+st.title("SCAMPI: Legacy Inventory Intelligence System")
 st.write(
-    "Upload a document below and ask a question about it – GPT will answer! "
+    "Upload a document (.txt, .md or .csv) below and ask a question about it a custom artificial intelligence large language model (LLM) model will answer! "
 )
 
 # Access the OpenAI API key from Streamlit secrets
